@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+	<meta property="og:title" content="INFAR.ID">
+<meta property="og:description" content="Website sederhana yang berisi informasi dan pembelajaran kosa kata">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Kosa Kata Hukum - KOFAHUM</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; }
+    body { min-height: 100vh; background: #f1f5f9; background-image: radial-gradient(at 0% 0%, rgba(186, 230, 253, 0.8) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(191, 219, 254, 0.7) 0px, transparent 50%); background-attachment: fixed; color: #0f172a; padding-bottom: 110px; margin: 0; }
+    
+    .ios-navbar-glass { background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(35px) saturate(220%); -webkit-backdrop-filter: blur(35px) saturate(220%); border-bottom: 1.5px solid rgba(255, 255, 255, 0.9); box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03); }
+    .user-pill { background: rgba(255, 255, 255, 0.85); border: 1.5px solid rgba(255, 255, 255, 1); backdrop-filter: blur(20px); border-radius: 30px; padding: 5px 12px; max-width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    
+    .hero-banner-glass, .vocab-card-glass { background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.45) 50%, rgba(255, 255, 255, 0.65) 100%); backdrop-filter: blur(35px) saturate(220%); -webkit-backdrop-filter: blur(35px) saturate(220%); border-radius: 24px; border-top: 2px solid rgba(255, 255, 255, 1); border-left: 2px solid rgba(255, 255, 255, 0.95); border-right: 1.5px solid rgba(255, 255, 255, 0.5); border-bottom: 1.5px solid rgba(255, 255, 255, 0.35); box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05), inset 0 2px 3px rgba(255, 255, 255, 1); padding: 18px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); height: 100%; }
+    .vocab-card-glass:hover { transform: translateY(-3px); background: rgba(255, 255, 255, 0.95); border-color: #bfdbfe; box-shadow: 0 15px 35px rgba(37, 99, 235, 0.12); }
+    
+    .search-ios-glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border-radius: 20px; padding: 10px 16px 10px 42px; border: 1.5px solid rgba(255, 255, 255, 1); width: 100%; color: #0f172a; outline: none; font-size: 0.9rem; transition: all 0.25s ease; }
+    .search-ios-glass:focus { background: #ffffff; border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); }
+    .badge-glass { background: rgba(219, 234, 254, 0.9); border: 1px solid rgba(147, 197, 253, 0.8); color: #1d4ed8; font-weight: 600; border-radius: 10px; padding: 3px 8px; font-size: 0.7rem; white-space: nowrap; display: inline-block; }
+    
+    .tab-bar-container { position: fixed; bottom: 12px; left: 0; right: 0; display: flex; justify-content: center; padding: 0 12px; z-index: 1000; }
+    .tab-bar-glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(35px) saturate(230%); -webkit-backdrop-filter: blur(35px) saturate(230%); border: 1.5px solid rgba(255, 255, 255, 0.95); border-radius: 30px; padding: 5px 8px; display: flex; gap: 6px; box-shadow: 0 15px 35px rgba(15, 23, 42, 0.15); overflow-x: auto; max-width: 100%; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .tab-bar-glass::-webkit-scrollbar { display: none; }
+    .tab-btn { border: none; background: transparent; color: #64748b; padding: 6px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 500; display: flex; align-items: center; gap: 6px; transition: all 0.25s ease; white-space: nowrap; cursor: pointer; flex-shrink: 0; text-decoration: none; }
+    .tab-btn.active { background: #ffffff; color: #2563eb; font-weight: 600; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg ios-navbar-glass sticky-top py-2">
+    <div class="container px-3">
+      <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-primary fs-5" href="dashboard.html">
+        <div class="bg-primary text-white rounded-3 px-2 py-1 fs-6 shadow-sm"><i class="fa-solid fa-gavel"></i></div>
+        KOFAHUM - Hukum
+      </a>
+      <div class="d-flex align-items-center gap-2">
+        <div class="user-pill d-flex align-items-center gap-2">
+          <i class="fa-regular fa-user text-primary"></i>
+          <span class="text-dark small fw-medium" id="userDisplay">Pengguna</span>
+        </div>
+        <button id="btnLogout" class="btn btn-outline-danger btn-sm rounded-pill px-2 py-1" type="button"><i class="fa-solid fa-power-off"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container px-3 py-3">
+    <div class="hero-banner-glass mb-4">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <div>
+          <span class="badge-glass mb-1"><i class="fa-solid fa-scale-balanced me-1"></i> Glosarium Lengkap</span>
+          <h4 class="fw-bold text-dark mb-0 fs-5">Kosa Kata Hukum & Peradilan</h4>
+        </div>
+        <span class="badge-glass bg-primary text-white" id="totalCount">0 Istilah</span>
+      </div>
+      <p class="text-secondary small mb-3">Daftar terminologi resmi yuridis, hukum perdata, pidana, dan tata peradilan Indonesia.</p>
+      <div class="position-relative">
+        <i class="fa-solid fa-magnifying-glass position-absolute start-0 top-50 translate-middle-y ms-3 text-secondary"></i>
+        <input type="text" id="searchInput" class="search-ios-glass" placeholder="Cari kosa kata hukum...">
+      </div>
+    </div>
+
+    <div class="row g-3 mb-4" id="vocabGrid"></div>
+  </div>
+
+  <!-- Bottom Floating Glass Navigation -->
+  <div class="tab-bar-container">
+    <div class="tab-bar-glass">
+      <a href="dashboard.html" class="tab-btn"><i class="fa-solid fa-house"></i><span>Dashboard</span></a>
+      <a href="hukum.html" class="tab-btn active"><i class="fa-solid fa-gavel"></i><span>Hukum</span></a>
+      <a href="pemerintahan.html" class="tab-btn"><i class="fa-solid fa-building-columns"></i><span>Pemerintahan</span></a>
+      <a href="nasional.html" class="tab-btn"><i class="fa-solid fa-flag"></i><span>Nasional</span></a>
+      <a href="internasional.html" class="tab-btn"><i class="fa-solid fa-globe"></i><span>Internasional</span></a>
+      <a href="hari.html" class="tab-btn"><i class="fa-solid fa-comments"></i><span>Sehari-Hari</span></a>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD6sXokemVHq86ieQFG1IcRLgP_l1fSJ64",
+      authDomain: "kofa-a3de8.firebaseapp.com",
+      projectId: "kofa-a3de8",
+      storageBucket: "kofa-a3de8.firebasestorage.app",
+      messagingSenderId: "699376168574",
+      appId: "1:699376168574:web:baa00693be82b6eed6322f",
+      databaseURL: "https://kofa-a3de8-default-rtdb.asia-southeast1.firebasedatabase.app/"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) window.location.replace('index.html');
+      else document.getElementById('userDisplay').textContent = user.displayName || user.email;
+    });
+
+    document.getElementById('btnLogout').addEventListener('click', () => {
+      signOut(auth);
+      window.location.replace('index.html');
+    });
+
+    // Array kosa kata Hukum (Dapat ditambahkan hingga Ribuan data)
+    const dataHukum = [
+      { term: "Yurisprudensi", def: "Keputusan hakim terdahulu yang dijadikan dasar pertimbangan hukum oleh hakim berikutnya." },
+      { term: "Gugatan Perdata", def: "Tindakan hukum menuntut hak atau ganti rugi atas pelanggaran keperdataan di pengadilan." },
+      { term: "Amnesti", def: "Pengampunan hukum yang diberikan oleh kepala negara kepada kelompok pelaku tindak pidana." },
+      { term: "Asas Presumsi Tak Bersalah", def: "Prinsip bahwa seseorang dianggap tidak bersalah sebelum ada putusan pengadilan yang sah." },
+      { term: "Restoratif Justice", def: "Penyelesaian perkara pidana dengan melibatkan pelaku, korban, dan masyarakat untuk memulihkan keadaan." },
+      { term: "Banding", def: "Permohonan pemeriksaan ulang terhadap keputusan pengadilan tingkat pertama ke pengadilan tinggi." },
+      { term: "Kasasi", def: "Upaya hukum pembatalan putusan pengadilan tingkat banding yang diajukan kepada Mahkamah Agung." },
+      { term: "Praperadilan", def: "Wewenang pengadilan negeri untuk memeriksa sah atau tidaknya penangkapan, penahanan, atau penghentian penyidikan." },
+      { term: "Beban Pembuktian", def: "Kewajiban salah satu pihak litigasi untuk memperlihatkan bukti atas klaim yang diajukan." },
+      { term: "Subjek Hukum", def: "Pemegang hak dan kewajiban menurut hukum, meliputi manusia dan badan hukum." },
+      { term: "Objek Hukum", def: "Segala sesuatu yang berguna bagi subjek hukum dan dapat menjadi pokok suatu hubungan hukum." },
+      { term: "Delik Pidana", def: "Suatu perbuatan yang melanggar hukum pidana dan dapat dikenakan sanksi pidana." },
+      { term: "Ganti Rugi", def: "Pembayaran dalam bentuk uang atau barang atas kerugian yang dialami pihak akibat perbuatan melawan hukum." },
+      { term: "Sengketa Perdata", def: "Perselisihan antara dua pihak atau lebih mengenai hak dan kewajiban keperdataan." },
+      { term: "Penyitaan", def: "Tindakan penyidik mengambil alih atau menyimpan barang bukti di bawah penguasaannya untuk kepentingan pembuktian." }
+    ];
+
+    const vocabGrid = document.getElementById('vocabGrid');
+    const searchInput = document.getElementById('searchInput');
+    const totalCount = document.getElementById('totalCount');
+
+    function renderData() {
+      const q = searchInput.value.toLowerCase();
+      vocabGrid.innerHTML = '';
+      
+      const filtered = dataHukum.filter(i => i.term.toLowerCase().includes(q) || i.def.toLowerCase().includes(q));
+      totalCount.textContent = `${filtered.length} Istilah`;
+
+      if (filtered.length === 0) {
+        vocabGrid.innerHTML = `<div class="col-12 text-center py-4"><p class="text-secondary small">Kosa kata hukum tidak ditemukan.</p></div>`;
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+      filtered.forEach(v => {
+        const col = document.createElement('div');
+        col.className = 'col-12 col-md-6 col-lg-4';
+        col.innerHTML = `
+          <div class="vocab-card-glass">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="badge-glass">Hukum</span>
+              <i class="fa-solid fa-bookmark text-secondary opacity-50 fs-7"></i>
+            </div>
+            <h6 class="fw-bold text-dark mb-1">${v.term}</h6>
+            <p class="text-secondary small mb-0" style="line-height: 1.5;">${v.def}</p>
+          </div>
+        `;
+        fragment.appendChild(col);
+      });
+      vocabGrid.appendChild(fragment);
+    }
+
+    searchInput.addEventListener('input', renderData);
+    renderData();
+  </script>
+</body>
+</html>
